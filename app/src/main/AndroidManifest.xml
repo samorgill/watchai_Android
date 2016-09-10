@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="uk.ac.mmu.babywatch">
+
+    <!-- Permissions the Application Requires -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="com.samsung.accessory.permission.ACCESSORY_FRAMEWORK" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
+    <uses-permission android:name="com.samsung.WATCH_APP_TYPE.Companion" />
+    <uses-permission android:name="com.samsung.wmanager.ENABLE_NOTIFICATION" />
+
+
+    <service android:name=".synchronization_services.DataTransferService"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <!-- Mqtt Service -->
+        <service android:name="org.eclipse.paho.android.service.MqttService" >
+        </service>
+        <service android:name="uk.ac.mmu.watchai.register.TizenConnection" />
+
+        <activity android:name="uk.ac.mmu.watchai.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="uk.ac.mmu.watchai.register.Test"> </activity>
+        <activity android:name="uk.ac.mmu.watchai.register.Registration"></activity>
+        <activity android:name="uk.ac.mmu.watchai.things.MQTT"></activity>
+        <activity android:name="uk.ac.mmu.watchai.things.DB_Utils">
+
+        </activity>
+
+        <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver" >
+            <intent-filter>
+                <action android:name="com.samsung.accessory.action.REGISTER_AGENT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="com.samsung.accessory.action.SERVICE_CONNECTION_REQUESTED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="AccessoryServicesLocation"
+            android:value="/res/xml/accessoryservices.xml" />
+        <meta-data
+            android:name="GearAppType"
+            android:value="wgt" />
+      <meta-data
+            android:name="master_app_name"
+            android:value="Watchai"
+            />
+        <meta-data
+            android:name="master_app_packagename"
+            android:value="uk.ac.mmu.watchai.register.Registration"
+            />
+
+
+    </application>
+
+</manifest>

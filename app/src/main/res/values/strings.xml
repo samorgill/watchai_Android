@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Watchai</string>
+    <string name="hello_world">Hello BabyWatch!</string>
+    <string name="ConnectionAcceptedMsg">Service Connection from HelloAccessory has been accepted.</string>
+    <string name="ConnectionEstablishedMsg">Service Connection with HelloAccessory has been established.</string>
+    <string name="ConnectionTerminateddMsg">Service Connection with HelloAccessory has been terminated.</string>
+    <string name="ConnectionAlreadyExist">Service Connection has already been existed!!!</string>
+    <string name="ConnectionAlreadyDisconnected">Service Connection has already been disconnected!!!</string>
+    <string name="Email">Email</string>
+    <string name="Username">Username</string>
+    <string name="Pass1">Password</string>
+    <string name="Pass2">Reenter password</string>
+    <string name="Phone">Phone no. for text alerts (optional)</string>
+    <string name="IP">Search for WatchaiHub</string>
+    <string name="action_settings">Settings</string>
+</resources>
