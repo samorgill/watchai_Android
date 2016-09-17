@@ -1,19 +1,17 @@
 package uk.ac.mmu.watchai.things;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Switch;
@@ -29,14 +27,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 import uk.ac.mmu.babywatch.R;
-import uk.ac.mmu.watchai.things.MQTT;
 
 
-public class DB_Utils extends AppCompatActivity {
+
+public class Things extends AppCompatActivity {
 
     String TAG = "Sensor MainActivity";
     LinearLayout l1;
@@ -47,41 +43,32 @@ public class DB_Utils extends AppCompatActivity {
     TextView tv;
     private String usrName, ipAddy;
 
-
-
+    ActionBar ab;
+    int textSize = 20;
+    int top = 65;
+    int left = 60;
+    int bottom = 5;
+    int right = 0;
     private static String mqttMsg;
     private static String mqttTopic;
 
-    //Home
-   /*public static String sensorServerURL =
-            "http://192.168.0.19/Server/DataToServer";*/
-
     // WebServer
     public static String sensorServerURL =
-            "http://2-dot-projectbabywatch.appspot.com/";
-
-
-
-
-
-
-    //192 is my IPv4 address on the laptop used by localhost. This will need to change for Pi.
-    // Can only be accessed via same wifi network. "Server" is the program name in Eclipse
-    //"http://10.0.2.2:8080/SensorServer/sensorToDB";
+            "http://3-dot-projectbabywatch.appspot.com/";
 
     MQTT mqttClass;
     public Switch switchTog;
     public RadioButton radBtn;
     private Context mContext;
+    GetSet getSet;
+    Switch tc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.db_utils);
+        setContentView(R.layout.things);
+       // ab.setTitle("Things");
 
-        // Ignore this code if not sending location to server
-        // IMPORTANT: Strict mode only here to allow networking in main thread.
-        // Ideally create an AsyncTask
-        // Need to remove this after testing initial solution and use AsyncTask
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -92,7 +79,8 @@ public class DB_Utils extends AppCompatActivity {
         ipAddy = settings.getString("ipadd", "");
         usrName = settings.getString("usrName", "");
 
-        LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout2);
+        //LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout2);
+      //  tc = (Switch) findViewById(R.color.text);
         tabLay = (TableLayout) findViewById(R.id.tabLay);
         tabRow = (TableRow) findViewById(R.id.tabRow);
 
@@ -101,7 +89,8 @@ public class DB_Utils extends AppCompatActivity {
         mqttClass = new MQTT();
         mContext = this;
 
-        getAll();
+        getSet = new GetSet();
+        getAll(mContext);
     }
 
 
@@ -191,22 +180,7 @@ public class DB_Utils extends AppCompatActivity {
         return jArr;
     }
 
-/*
-    String getSensorData(String sensorName){
-        // retrieves the sensor value for sensor named sensorName
-
-        // build up URL to retrieve sensor data from server
-        //String fullURLStr = sensorServerURL + "?getdata=true&sensorname="+sensorName;
-        String fullURLStr = sensorServerURL + "GetDoor?&doorName2="+sensorName;
-        Log.i(TAG, "Retrieving sensor data from "+fullURLStr);
-        // send it using utility method
-        String result = sendToServer(fullURLStr);
-
-        return result;
-    }
-*/
-
-    void getAll(){
+    void getAll(final Context mContext){
         JSONObject jObject = new JSONObject();
 
         String fullURLStr = sensorServerURL + "GetAllThings?user3=" + usrName;
@@ -219,7 +193,7 @@ public class DB_Utils extends AppCompatActivity {
             for (int i = 0; i < jArray.length(); i++) {
                 jObject = jArray.getJSONObject(i);
 
-                if(jObject.get("state").equals("Locked")){
+                if(jObject.get("state").equals("Locked") || jObject.get("state").equals("On")){
 
                     thing = jObject.get("thing").toString();
                     serial = jObject.get("serial").toString();
@@ -230,6 +204,13 @@ public class DB_Utils extends AppCompatActivity {
                     sw = new Switch(this);
                     sw.setChecked(true);
                     sw.setText(thing);
+                    int col = this.getResources().getColor(R.color.text);
+                    int checkCol = this.getResources().getColor(R.color.switch_col);
+                    sw.setTextColor(col);
+                    sw.setHighlightColor(checkCol);
+                    sw.setTextSize(textSize);
+                    sw.setPadding(left, top, right, bottom);
+
 
                     final String th = thing;
                     final String st = "Unlocked";
@@ -240,11 +221,11 @@ public class DB_Utils extends AppCompatActivity {
                     sw.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            setMqttTopic(usrName+"/"+ty+"/"+zo+"/"+ro+"/"+th);
-                            setMqttMsg(st);
+                            getSet.setMqttTopic(usrName+"/"+ty+"/"+zo+"/"+ro+"/"+th);
+                            getSet.setMqttMsg(st);
                             sendSensorData(th, st, sl, ty, zo, ro);
                             tabLay.removeAllViews();
-                            getAll();
+                            getAll(mContext);
                         }
                     });
 
@@ -253,7 +234,7 @@ public class DB_Utils extends AppCompatActivity {
                     tabRow.addView(sw);
                     tabLay.addView(tabRow);
 
-                }else if(jObject.get("state").equals("Unlocked")){
+                }else if(jObject.get("state").equals("Unlocked") || jObject.get("state").equals("Off")){
 
                     thing = jObject.get("thing").toString();
                     serial = jObject.get("serial").toString();
@@ -265,6 +246,13 @@ public class DB_Utils extends AppCompatActivity {
                     sw.setChecked(false);
                     sw.setText(thing);
 
+                    int col = this.getResources().getColor(R.color.text_low);
+
+                    sw.setTextColor(col);
+                    sw.setTextSize(textSize);
+                    sw.setPadding(left, top, right, bottom);
+
+
                     final String th = thing;
                     final String st = "Locked";
                     final String sl = serial;
@@ -275,12 +263,12 @@ public class DB_Utils extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
 
-                            setMqttTopic(usrName+"/"+ty+"/"+zo+"/"+ro+"/"+th);
-                            setMqttMsg(st);
+                            getSet.setMqttTopic(usrName+"/"+ty+"/"+zo+"/"+ro+"/"+th);
+                            getSet.setMqttMsg(st);
                             sendSensorData(th, st, sl, ty, zo, ro);
 
                             tabLay.removeAllViews();
-                            getAll();
+                            getAll(mContext);
                         }
                     });
 
@@ -348,21 +336,7 @@ public class DB_Utils extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static String getMqttMsg() {
-        return mqttMsg;
-    }
 
-    public void setMqttMsg(String mqttMsg) {
-        this.mqttMsg = mqttMsg;
-    }
-
-    public static String getMqttTopic() {
-        return mqttTopic;
-    }
-
-    public void setMqttTopic(String mqttTopic) {
-        this.mqttTopic = mqttTopic;
-    }
 
 
 

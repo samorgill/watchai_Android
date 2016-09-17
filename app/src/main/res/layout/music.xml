@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tabLay"
+
+            >
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Genius"
+                    android:id="@+id/geniusBtn"
+                    android:layout_column="0"
+                    android:onClick="clkGenius"
+                    android:background="@drawable/button_selector"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Sleep"
+                    android:id="@+id/sleepBtn"
+                    android:layout_column="0"
+                    android:onClick="clkSleep"
+                    android:background="@drawable/button_selector"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Party"
+                    android:id="@+id/partyBtn"
+                    android:layout_column="0"
+                    android:onClick="clkParty"
+                    android:background="@drawable/button_selector"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Rhyme"
+                    android:id="@+id/rhymeBtn"
+                    android:layout_column="0"
+                    android:onClick="clkRhyme"
+                    android:background="@drawable/button_selector"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Stop"
+                    android:id="@+id/stopBtn"
+                    android:layout_column="0"
+                    android:onClick="clkStop"
+                    android:background="@drawable/red_button"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width" />
+
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

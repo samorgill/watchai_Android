@@ -9,13 +9,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import uk.ac.mmu.babywatch.R;
 import uk.ac.mmu.watchai.register.Registration;
-import uk.ac.mmu.watchai.register.Test;
-import uk.ac.mmu.watchai.things.DB_Utils;
+import uk.ac.mmu.watchai.things.Monitor;
+import uk.ac.mmu.watchai.things.Music;
+import uk.ac.mmu.watchai.things.Recipes;
+import uk.ac.mmu.watchai.things.Things;
 import uk.ac.mmu.watchai.things.MQTT;
 
 
@@ -103,7 +104,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickThings(View v){
-        Intent intent = new Intent(this, DB_Utils.class);
+        Intent intent = new Intent(this, Things.class);
+        startActivity(intent);
+    }
+
+    public void clickMonitor(View v){
+        Intent intent = new Intent(this, Monitor.class);
+        startActivity(intent);
+    }
+
+
+    public void clickRecipes(View v){
+        Intent intent = new Intent(this, Recipes.class);
+        startActivity(intent);
+    }
+
+
+    public void clickMusic(View v){
+        Intent intent = new Intent(this, Music.class);
         startActivity(intent);
     }
 

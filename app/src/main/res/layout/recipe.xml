@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
+        android:background="@color/colorPrimary">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tabLay">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Sleep"
+                    android:id="@+id/sleepBtn"
+                    android:layout_column="0"
+                    android:onClick="clkSleep"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width"
+                    android:background="@drawable/button_selector" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Wake"
+                    android:id="@+id/wakeBtn"
+                    android:layout_column="0"
+                    android:onClick="clkWake"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width"
+                    android:background="@drawable/button_selector" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Sooth"
+                    android:id="@+id/soothBtn"
+                    android:layout_column="0"
+                    android:onClick="clkSooth"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width"
+                    android:background="@drawable/button_selector" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Entertain"
+                    android:id="@+id/entBtn"
+                    android:layout_column="0"
+                    android:onClick="clkEnt"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width"
+                    android:background="@drawable/button_selector" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Emergency"
+                    android:id="@+id/emBtn"
+                    android:layout_column="0"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width"
+                    android:background="@drawable/red_button" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

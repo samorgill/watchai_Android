@@ -42,12 +42,18 @@
             </intent-filter>
         </activity>
         <activity android:name="uk.ac.mmu.watchai.register.Test"> </activity>
-        <activity android:name="uk.ac.mmu.watchai.register.Registration"></activity>
+        <activity android:name="uk.ac.mmu.watchai.register.Registration"
+            android:label="Registration"></activity>
         <activity android:name="uk.ac.mmu.watchai.things.MQTT"></activity>
-        <activity android:name="uk.ac.mmu.watchai.things.DB_Utils">
+        <activity android:name="uk.ac.mmu.watchai.things.Things"
+            android:label="Things"></activity>
 
-        </activity>
-
+        <activity android:name="uk.ac.mmu.watchai.things.Monitor"
+            android:label="Monitor"></activity>
+        <activity android:name="uk.ac.mmu.watchai.things.Recipes"
+            android:label="Recipe"></activity>
+        <activity android:name="uk.ac.mmu.watchai.things.Music"
+            android:label="Music"></activity>
         <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver" >
             <intent-filter>
                 <action android:name="com.samsung.accessory.action.REGISTER_AGENT" />

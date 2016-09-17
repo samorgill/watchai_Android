@@ -56,7 +56,7 @@ import uk.ac.mmu.watchai.things.MQTT;
 public class Registration extends AppCompatActivity{
 
     public static String sensorServerURL =
-            "http://2-dot-projectbabywatch.appspot.com/";
+            "http://3-dot-projectbabywatch.appspot.com/";
 
     String SERVICE_TYPE = "MQTT";
     String SERVICE_NAME = "Android";

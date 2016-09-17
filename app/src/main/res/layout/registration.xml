@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            android:id="@+id/textView2" />
-
-        <TextView
-            android:layout_width="225dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView"
-            android:layout_below="@+id/textView2"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
 
         <EditText
@@ -32,7 +17,9 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/userName"
-            android:hint="@string/Username"/>
+            android:hint="@string/Username"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text_hint"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -40,7 +27,9 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/email"
-            android:hint="@string/Email"/>
+            android:hint="@string/Email"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text_hint"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -49,7 +38,8 @@
             android:ems="10"
             android:id="@+id/pass"
             android:hint="@string/Pass1"
-            />
+            android:textColor="@color/text"
+            android:textColorHint="@color/text_hint"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -57,7 +47,9 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/pass2"
-            android:hint="@string/Pass2" />
+            android:hint="@string/Pass2"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text_hint"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -65,7 +57,9 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/phoneNo"
-            android:hint="@string/Phone"/>
+            android:hint="@string/Phone"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text_hint"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -77,7 +71,9 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/ipView"
-                android:hint="@string/IP"/>
+                android:hint="@string/IP"
+                android:textColorHint="@color/text_hint"
+                android:textColor="@color/text" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -94,7 +90,8 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:id="@+id/regButton"
-            android:onClick="clickReg" />
+            android:onClick="clickReg"
+            android:background="@drawable/button_selector" />
 
         <Button
             android:layout_width="119dp"

@@ -9,18 +9,11 @@
         android:layout_height="match_parent"
         android:id="@+id/linearLayout">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:id="@+id/linearLayout2">
-
-        </LinearLayout>
-
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/tabLay">
+            android:id="@+id/tabLay"
+            android:background="@color/colorPrimary">
 
             <TableRow
                 android:layout_width="match_parent"
