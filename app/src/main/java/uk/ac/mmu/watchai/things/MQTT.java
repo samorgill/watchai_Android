@@ -49,7 +49,7 @@ public class MQTT extends AppCompatActivity {
 
 
         tv = (TextView) findViewById(R.id.textView);
-        btn = (Button) findViewById(R.id.listenBtn);
+       // btn = (Button) findViewById(R.id.listenBtn);
 
        /* SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         String ipAddy = settings.getString("ipadd", "");

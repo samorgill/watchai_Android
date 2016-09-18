@@ -13,5 +13,6 @@
     <color name="text_low">#9d9ea1</color>
     <color name="text_hint">#939498</color>
     <color name="switch_col">#2196f3</color>
+    <color name="title">#e29103</color>
 
 </resources>

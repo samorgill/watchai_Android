@@ -99,7 +99,7 @@ public class Monitor extends AppCompatActivity {
         getSet = new GetSet();
         //Log.i("Username works?: ", usrName);
 
-        getAll();
+        getAll(mContext);
     }
 
 
@@ -178,7 +178,7 @@ public class Monitor extends AppCompatActivity {
         return jArr;
     }
 
-    void getAll(){
+    void getAll(final Context mContext){
         JSONObject jObject = new JSONObject();
 
         String fullURLStr = sensorServerURL + "GetMonitors?user=" + usrName;
@@ -214,16 +214,18 @@ public class Monitor extends AppCompatActivity {
                             getSet.setMqttMsg(st);
                             sendSensorData(st, ty);
                             tabLay.removeAllViews();
-                            getAll();
+
+                            getAll(mContext);
                         }
                     });
 
 
                     tabRow = new TableRow(this);
+
                     tabRow.addView(sw);
                     tabLay.addView(tabRow);
 
-                }else if(jObject.get("state").equals("Off")){
+                }else if(jObject.get("state+").equals("Off")){
                     type = jObject.get("type").toString();
 
                     sw = new Switch(this);
@@ -245,11 +247,13 @@ public class Monitor extends AppCompatActivity {
                             sendSensorData(st, ty);
 
                             tabLay.removeAllViews();
-                            getAll();
+                           // sw.setChecked(true);
+                            getAll(mContext);
                         }
                     });
 
                     tabRow = new TableRow(this);
+
                     tabRow.addView(sw);
                     tabLay.addView(tabRow);
                 }

@@ -44,11 +44,11 @@ public class Music extends AppCompatActivity{
     private Context mContext;
     GetSet getSet;
     private String top = "/Music";
-    private String sleep = "Sleep";
-    private String genius = "Genius";
-    private String party = "Party";
-    private String rhyme = "Rhyme";
-    private String stop = "Stop";
+    private String sleep = "sleep";
+    private String genius = "genius";
+    private String party = "party";
+    private String rhyme = "rhyme";
+    private String stop = "stop";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -53,7 +53,8 @@
         <activity android:name="uk.ac.mmu.watchai.things.Recipes"
             android:label="Recipe"></activity>
         <activity android:name="uk.ac.mmu.watchai.things.Music"
-            android:label="Music"></activity>
+            android:label="Music"
+            ></activity>
         <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver" >
             <intent-filter>
                 <action android:name="com.samsung.accessory.action.REGISTER_AGENT" />

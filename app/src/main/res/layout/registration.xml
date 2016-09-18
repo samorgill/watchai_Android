@@ -64,7 +64,9 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="301dp"
@@ -74,14 +76,6 @@
                 android:hint="@string/IP"
                 android:textColorHint="@color/text_hint"
                 android:textColor="@color/text" />
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search"
-                android:id="@+id/listenBtn"
-                android:onClick="clickSearch" />
 
         </LinearLayout>
 
@@ -93,12 +87,6 @@
             android:onClick="clickReg"
             android:background="@drawable/button_selector" />
 
-        <Button
-            android:layout_width="119dp"
-            android:layout_height="wrap_content"
-            android:text="Broadcast"
-            android:id="@+id/broadBtn"
-            android:onClick="onClickBroadcast" />
     </LinearLayout>
 
 
