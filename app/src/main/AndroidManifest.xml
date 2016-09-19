@@ -47,6 +47,8 @@
         <activity android:name="uk.ac.mmu.watchai.things.MQTT"></activity>
         <activity android:name="uk.ac.mmu.watchai.things.Things"
             android:label="Things"></activity>
+        <activity android:name="uk.ac.mmu.watchai.things.MQTT_Cloud"
+            android:label="Cloud MQTT"></activity>
 
         <activity android:name="uk.ac.mmu.watchai.things.Monitor"
             android:label="Monitor"></activity>

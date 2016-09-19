@@ -185,7 +185,7 @@ public class Monitor extends AppCompatActivity {
         Log.i("GetAll url", fullURLStr);
         JSONArray jArray = getFromServer(fullURLStr);
 
-        String state, type;
+        String type;
 
         try {
             for (int i = 0; i < jArray.length(); i++) {
@@ -225,7 +225,7 @@ public class Monitor extends AppCompatActivity {
                     tabRow.addView(sw);
                     tabLay.addView(tabRow);
 
-                }else if(jObject.get("state+").equals("Off")){
+                }else if(jObject.get("state").equals("Off")){
                     type = jObject.get("type").toString();
 
                     sw = new Switch(this);
@@ -247,7 +247,7 @@ public class Monitor extends AppCompatActivity {
                             sendSensorData(st, ty);
 
                             tabLay.removeAllViews();
-                           // sw.setChecked(true);
+                            sw.setChecked(true);
                             getAll(mContext);
                         }
                     });
@@ -274,7 +274,7 @@ public class Monitor extends AppCompatActivity {
         mqttClass.msgClick(mContext);
 
         String fullURLStr = sensorServerURL +
-                "GetMonitors?&user="+usrName;
+                "Monitor?&user="+usrName+"&state="+st+"&type="+ty;
         Log.i(TAG, "Retrieving sensor data from "+fullURLStr);
 
         // send it using utility method

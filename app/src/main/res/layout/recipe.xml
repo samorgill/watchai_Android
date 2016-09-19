@@ -91,8 +91,26 @@
                     android:layout_marginTop="@dimen/button_top_margin"
                     android:height="@dimen/btn_height"
                     android:width="@dimen/btn_width"
-                    android:background="@drawable/red_button" />
+                    android:background="@drawable/red_button"
+                    android:onClick="clkEmerg" />
             </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:text="Stop"
+                    android:id="@+id/stopBtn"
+                    android:layout_column="0"
+                    android:layout_marginLeft="@dimen/button_left_margin"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:height="@dimen/btn_height"
+                    android:width="@dimen/btn_width"
+                    android:background="@drawable/red_button"
+                    android:onClick="clkStop" />
+            </TableRow>
+
         </TableLayout>
 
     </LinearLayout>

@@ -105,6 +105,7 @@ public class Recipes extends AppCompatActivity{
     private String sooth = "sooth";
     private String ent = "entertain";
     private String emerg = "emergency";
+    private String stop = "stop";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +178,10 @@ public class Recipes extends AppCompatActivity{
      */
     public void clkEmerg(View v){
         sendMqtt(emerg);
+    }
+
+    public void clkStop(View v){
+        sendMqtt(stop);
     }
 
     /**

@@ -6,22 +6,26 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import android.util.Log;
-
 import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.*;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-
 
 import uk.ac.mmu.babywatch.R;
 
 /**
  * Created by ssorg on 27/08/2016.
  */
-public class MQTT extends AppCompatActivity {
+public class MQTT_Cloud extends AppCompatActivity {
 
 
 
@@ -49,13 +53,6 @@ public class MQTT extends AppCompatActivity {
 
 
         tv = (TextView) findViewById(R.id.textView);
-       // btn = (Button) findViewById(R.id.listenBtn);
-
-       /* SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        String ipAddy = settings.getString("ipadd", "");
-        String usrName = settings.getString("usrName", "");
-        tv.setText(ipAddy + " " + usrName);
-*/
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         String ipAddy = settings.getString("ipadd", "");
@@ -83,9 +80,9 @@ public class MQTT extends AppCompatActivity {
         topic        = top;
         content      = mes;
         qos             = 1;
-        //broker       = "tcp://" + ipAddy + ":1883";
+
         broker = "tcp://m21.cloudmqtt.com:17781";
-        clientId     = "MqttServiceAndroid";
+        clientId     = "WatchaiAndroid";
 
         Log.i("User: ", topic);
         Log.i("Broker: ", broker);
@@ -112,8 +109,8 @@ public class MQTT extends AppCompatActivity {
         try {
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
-          connOpts.setUserName("samo");
-           connOpts.setPassword(new char[]{'a', 't', 'h', 'c', 'l', 'i', 'a', 't', 'h', '8'});
+          /* connOpts.setUserName("samo");
+           connOpts.setPassword(new char[]{'a', 't', 'h', 'c', 'l', 'i', 'a', 't', 'h', '8'});*/
             //mqttClient.connect(connOpts);
 
             mqttClient.connect(connOpts, null, new IMqttActionListener() {
