@@ -80,9 +80,8 @@ public class MQTT_Cloud extends AppCompatActivity {
         topic        = top;
         content      = mes;
         qos             = 1;
-
         broker = "tcp://m21.cloudmqtt.com:17781";
-        clientId     = "WatchaiAndroid";
+        clientId     = "Watchai_Android";
 
         Log.i("User: ", topic);
         Log.i("Broker: ", broker);

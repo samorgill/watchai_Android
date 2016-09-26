@@ -1,4 +1,4 @@
-package uk.ac.mmu.watchai;
+package uk.ac.mmu.watchai.uk.ac.mmu.watchai.Main;
 
 import android.content.Context;
 import android.content.DialogInterface;

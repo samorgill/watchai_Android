@@ -34,7 +34,7 @@
         </service>
         <service android:name="uk.ac.mmu.watchai.register.TizenConnection" />
 
-        <activity android:name="uk.ac.mmu.watchai.MainActivity">
+        <activity android:name="uk.ac.mmu.watchai.uk.ac.mmu.watchai.Main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

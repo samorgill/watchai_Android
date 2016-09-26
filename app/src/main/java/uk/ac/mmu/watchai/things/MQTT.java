@@ -66,13 +66,7 @@ public class MQTT extends AppCompatActivity {
 
 
     public void msgClick(Context mContext){
-
-
-        TextView tv;
-        Button btn;
-
         Context con = mContext;
-
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(con);
         String ipAddy = settings.getString("ipadd", "");
         String usrName = settings.getString("usrName", "");
@@ -83,9 +77,8 @@ public class MQTT extends AppCompatActivity {
         topic        = top;
         content      = mes;
         qos             = 1;
-        //broker       = "tcp://" + ipAddy + ":1883";
-        broker = "tcp://m21.cloudmqtt.com:17781";
-        clientId     = "MqttServiceAndroid";
+        broker       = "tcp://" + ipAddy + ":1883";
+        clientId     = "Watchai_Android";
 
         Log.i("User: ", topic);
         Log.i("Broker: ", broker);
@@ -95,9 +88,7 @@ public class MQTT extends AppCompatActivity {
         mqttClient.setCallback(new MqttCallback() {
             public void messageArrived(String topic, MqttMessage msg)
                     throws Exception {
-                System.out.println("Recieved:" + topic);
-                System.out.println("Recieved now:" + new String(msg.getPayload()));
-                Log.i("Recieved now:", new String(msg.getPayload()));
+                Log.i("Recieved message:", new String(msg.getPayload()));
             }
 
             public void deliveryComplete(IMqttDeliveryToken arg0) {
@@ -112,9 +103,6 @@ public class MQTT extends AppCompatActivity {
         try {
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
-          connOpts.setUserName("samo");
-           connOpts.setPassword(new char[]{'a', 't', 'h', 'c', 'l', 'i', 'a', 't', 'h', '8'});
-            //mqttClient.connect(connOpts);
 
             mqttClient.connect(connOpts, null, new IMqttActionListener() {
                 @Override
@@ -127,14 +115,9 @@ public class MQTT extends AppCompatActivity {
                         mqttClient.subscribe(topic, qos);
                         mqttClient.publish(topic, message);
                         mqttClient.disconnect();
-                    /*mqttClient.disconnect();
-                    System.exit(0);
-*/
                     } catch (MqttException ex) {
-
-                    }
-
                 }
+            }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {

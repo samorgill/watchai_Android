@@ -180,6 +180,13 @@ public class Things extends AppCompatActivity {
         return jArr;
     }
 
+    /**
+     * Get's all things from the database, creates switches based on their state and then sets
+     * them as click. When clicked an MQTT topic/message is generated and sent. The datatstore
+     * is then updated.
+     * @param mContext
+     */
+
     void getAll(final Context mContext){
         JSONObject jObject = new JSONObject();
 
@@ -187,7 +194,7 @@ public class Things extends AppCompatActivity {
         Log.i("GetAll url", fullURLStr);
         JSONArray jArray = getFromServer(fullURLStr);
 
-       String thing, state, serial, type, zone, room;
+        String thing, state, serial, type, zone, room;
 
         try {
             for (int i = 0; i < jArray.length(); i++) {
@@ -211,7 +218,6 @@ public class Things extends AppCompatActivity {
                     sw.setTextSize(textSize);
                     sw.setPadding(left, top, right, bottom);
 
-
                     final String th = thing;
                     final String st = "Unlocked";
                     final String sl = serial;
@@ -228,7 +234,6 @@ public class Things extends AppCompatActivity {
                             getAll(mContext);
                         }
                     });
-
 
                     tabRow = new TableRow(this);
                     tabRow.addView(sw);
@@ -281,13 +286,6 @@ public class Things extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-        //label1 = new TextView(this);
-        // label1.setText(aList);
-          /*  tabRow = new TableRow(this);
-            tabRow.addView(label1);*/
-
-        // getAll();
 
     }
 

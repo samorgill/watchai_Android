@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Binder;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -22,35 +19,21 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.samsung.android.sdk.SsdkUnsupportedException;
-import com.samsung.android.sdk.accessory.SA;
-import com.samsung.android.sdk.accessory.SAAgent;
-import com.samsung.android.sdk.accessory.SAAuthenticationToken;
-import com.samsung.android.sdk.accessory.SAPeerAgent;
-import com.samsung.android.sdk.accessory.SASocket;
 
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
-import java.security.spec.ECField;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
-import javax.jmdns.impl.DNSRecord;
 
 import uk.ac.mmu.babywatch.R;
-import uk.ac.mmu.watchai.MainActivity;
+import uk.ac.mmu.watchai.uk.ac.mmu.watchai.Main.MainActivity;
 import uk.ac.mmu.watchai.things.MQTT;
 
 public class Registration extends AppCompatActivity{
