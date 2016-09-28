@@ -29,8 +29,13 @@ import java.util.ArrayList;
 
 import uk.ac.mmu.babywatch.R;
 
+
 /**
- * Created by ssorg on 17/09/2016.
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * A class to monitor sensors
  */
 public class Monitor extends AppCompatActivity {
 
@@ -219,9 +224,7 @@ public class Monitor extends AppCompatActivity {
                         }
                     });
 
-
                     tabRow = new TableRow(this);
-
                     tabRow.addView(sw);
                     tabLay.addView(tabRow);
 
@@ -264,9 +267,15 @@ public class Monitor extends AppCompatActivity {
         }
     }
 
-    void sendSensorData(String st, String ty) {
-        // build up URL to send sensor data to server
 
+    /**
+     * Sends sensor data to the server and uses SharedPreferences to locally persist
+     * the IP Address of the Hub and the Username
+     *
+     * @param st
+     * @param ty
+     */
+    void sendSensorData(String st, String ty) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         String ipAddy = settings.getString("ipadd", "");
         String usrName = settings.getString("usrName", "");

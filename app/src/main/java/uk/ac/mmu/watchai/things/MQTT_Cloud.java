@@ -22,24 +22,22 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import uk.ac.mmu.babywatch.R;
 
+
 /**
- * Created by ssorg on 27/08/2016.
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * Cloud MQTT class for sending MQTT messages over the internet.
  */
 public class MQTT_Cloud extends AppCompatActivity {
 
-
-
-
-
     TextView tv, tv2;
     Button btn;
-
     String topic;
     String content;
     int qos;
     String broker;
-
-    //MQTT client id to use for the device. "" will generate a client id automatically
     String clientId;
 
     @Override
@@ -50,7 +48,6 @@ public class MQTT_Cloud extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
 
         tv = (TextView) findViewById(R.id.textView);
 
@@ -79,8 +76,8 @@ public class MQTT_Cloud extends AppCompatActivity {
 
         topic        = top;
         content      = mes;
-        qos             = 1;
-        broker = "tcp://m21.cloudmqtt.com:17781";
+        qos          = 1;
+        broker       = "tcp://m21.cloudmqtt.com:17781";
         clientId     = "Watchai_Android";
 
         Log.i("User: ", topic);
@@ -108,9 +105,6 @@ public class MQTT_Cloud extends AppCompatActivity {
         try {
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
-          /* connOpts.setUserName("samo");
-           connOpts.setPassword(new char[]{'a', 't', 'h', 'c', 'l', 'i', 'a', 't', 'h', '8'});*/
-            //mqttClient.connect(connOpts);
 
             mqttClient.connect(connOpts, null, new IMqttActionListener() {
                 @Override
@@ -123,9 +117,7 @@ public class MQTT_Cloud extends AppCompatActivity {
                         mqttClient.subscribe(topic, qos);
                         mqttClient.publish(topic, message);
                         mqttClient.disconnect();
-                    /*mqttClient.disconnect();
-                    System.exit(0);
-*/
+
                     } catch (MqttException ex) {
 
                     }

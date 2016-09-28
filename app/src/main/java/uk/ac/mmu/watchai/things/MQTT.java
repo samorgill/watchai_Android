@@ -18,24 +18,23 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import uk.ac.mmu.babywatch.R;
 
+
 /**
- * Created by ssorg on 27/08/2016.
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * Local MQTT class for sending MQTT messages on the local network
  */
+
 public class MQTT extends AppCompatActivity {
-
-
-
-
 
     TextView tv, tv2;
     Button btn;
-
     String topic;
     String content;
     int qos;
     String broker;
-
-    //MQTT client id to use for the device. "" will generate a client id automatically
     String clientId;
 
     @Override
@@ -47,23 +46,18 @@ public class MQTT extends AppCompatActivity {
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-
         tv = (TextView) findViewById(R.id.textView);
-       // btn = (Button) findViewById(R.id.listenBtn);
-
-       /* SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
-        String ipAddy = settings.getString("ipadd", "");
-        String usrName = settings.getString("usrName", "");
-        tv.setText(ipAddy + " " + usrName);
-*/
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         String ipAddy = settings.getString("ipadd", "");
         String usrName = settings.getString("usrName", "");
-
     }
 
-
+    /**
+     * On click gets Ip Address from SharedPreferences and sets Broker.
+     * Gets the topic and message generated from thing clicked
+     * @param mContext
+     */
 
     public void msgClick(Context mContext){
         Context con = mContext;
@@ -71,8 +65,8 @@ public class MQTT extends AppCompatActivity {
         String ipAddy = settings.getString("ipadd", "");
         String usrName = settings.getString("usrName", "");
 
-            String mes = GetSet.getMqttMsg();
-            String top = GetSet.getMqttTopic();
+        String mes = GetSet.getMqttMsg();
+        String top = GetSet.getMqttTopic();
 
         topic        = top;
         content      = mes;
@@ -96,7 +90,6 @@ public class MQTT extends AppCompatActivity {
             }
 
             public void connectionLost(Throwable arg0) {
-                // TODO Auto-generated method stub
             }
         });
 

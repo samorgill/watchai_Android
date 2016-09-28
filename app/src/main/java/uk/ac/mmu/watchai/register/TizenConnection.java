@@ -1,8 +1,11 @@
 package uk.ac.mmu.watchai.register;
 
 /**
- * Created by ssorg on 27/08/2016.
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * Modified Samsung methods to connect to the Gear.
  */
+
 /*
  * Copyright (c) 2015 Samsung Electronics Co., Ltd. All rights reserved.
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that
@@ -96,9 +99,6 @@ public class TizenConnection extends SAAgent {
     public void onCreate() {
         super.onCreate();
 
-        //setContentView(R.layout.registration);
-
-
         SA mAccessory = new SA();
         try {
             mAccessory.initialize(this);
@@ -109,11 +109,6 @@ public class TizenConnection extends SAAgent {
             }
         } catch (Exception e1) {
             e1.printStackTrace();
-            /*
-             * Your application can not use Samsung Accessory SDK. Your application should work smoothly
-             * without using this SDK, or you may want to notify user and close your application gracefully
-             * (release resources, stop Service threads, close UI thread, etc.)
-             */
             stopSelf();
         }
     }
@@ -149,10 +144,7 @@ public class TizenConnection extends SAAgent {
 
     @Override
     protected void onAuthenticationResponse(SAPeerAgent peerAgent, SAAuthenticationToken authToken, int error) {
-        /*
-         * The authenticatePeerAgent(peerAgent) API may not be working properly depending on the firmware
-         * version of accessory device. Please refer to another sample application for Security.
-         */
+
     }
 
     @Override

@@ -31,6 +31,13 @@ import java.util.ArrayList;
 import uk.ac.mmu.babywatch.R;
 
 
+/**
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * A method for controling things
+ */
 
 public class Things extends AppCompatActivity {
 
@@ -67,20 +74,16 @@ public class Things extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.things);
-       // ab.setTitle("Things");
 
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //checks the state when the app is launced
-
+        //Gets username and password
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         ipAddy = settings.getString("ipadd", "");
         usrName = settings.getString("usrName", "");
 
-        //LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout2);
-      //  tc = (Switch) findViewById(R.color.text);
         tabLay = (TableLayout) findViewById(R.id.tabLay);
         tabRow = (TableRow) findViewById(R.id.tabRow);
 
@@ -93,6 +96,11 @@ public class Things extends AppCompatActivity {
         getAll(mContext);
     }
 
+    /**
+     * Sends data to the server/ database
+     * @param urlStr
+     * @return
+     */
 
     String sendToServer (String urlStr) {
         URL url;
@@ -119,6 +127,11 @@ public class Things extends AppCompatActivity {
         return result;
     }
 
+    /**
+     * Gets data from the server
+     * @param urlStr
+     * @return
+     */
     JSONArray getFromServer(String urlStr){
         URL url;
         HttpURLConnection conn;
@@ -126,7 +139,7 @@ public class Things extends AppCompatActivity {
         String line = "";
         String result = "";
         String stat ="";
-        //String urlStr = "http://projectbabywatch.appspot.com/GetAllDoors";
+
         JSONObject jObject = new JSONObject();
         JSONObject jOb = new JSONObject();
         JSONArray jArray = new JSONArray();
@@ -138,15 +151,13 @@ public class Things extends AppCompatActivity {
             url = new URL(urlStr);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
-            // Issue the GET to send the data
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            // read the result to process response and ensure data sent
 
+            //Builds string and iterates through results
             StringBuilder sb = new StringBuilder();
             while ((line = rd.readLine()) != null) {
 
                 sb.append(line);
-
 
             }
             rd.close();
@@ -160,9 +171,7 @@ public class Things extends AppCompatActivity {
 
                 jAr.put(jObject.get("propertyMap"));
 
-
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -289,6 +298,16 @@ public class Things extends AppCompatActivity {
 
     }
 
+    /**
+     * Sends sensor data to the database and creates/sends MQTT message
+     * @param th
+     * @param st
+     * @param sl
+     * @param ty
+     * @param zo
+     * @param ro
+     */
+
     void sendSensorData(String th, String st, String sl, String ty, String zo, String ro) {
         // build up URL to send sensor data to server
 
@@ -296,37 +315,29 @@ public class Things extends AppCompatActivity {
         String ipAddy = settings.getString("ipadd", "");
         String usrName = settings.getString("usrName", "");
 
-
         mqttClass.msgClick(mContext);
-
 
         String fullURLStr = sensorServerURL +
                 "UpdateThing?&thing3="+th+"&state="+st+"&user4="+usrName + "&serial2=" + sl
                 + "&type2=" + ty +"&zone2=" +zo + "&room2=" + ro;
         Log.i(TAG, "Retrieving sensor data from "+fullURLStr);
 
-        // send it using utility method
         String result = sendToServer(fullURLStr);
-
     }
-
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_settings) {
             return true;
         }

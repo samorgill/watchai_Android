@@ -36,6 +36,15 @@ import uk.ac.mmu.babywatch.R;
 import uk.ac.mmu.watchai.uk.ac.mmu.watchai.Main.MainActivity;
 import uk.ac.mmu.watchai.things.MQTT;
 
+/**
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * JmDNS Broadcast & Listener. Broadcasts service (username) and listens for
+ * the Hubs service (IP address). Resolves service
+ */
+
 public class Registration extends AppCompatActivity{
 
     public static String sensorServerURL =
@@ -64,14 +73,13 @@ public class Registration extends AppCompatActivity{
         StrictMode.setThreadPolicy(policy);
 
         Intent intent2 = getIntent();
-       final TextView textV = (TextView) findViewById(R.id.textView);
+        final TextView textV = (TextView) findViewById(R.id.textView);
 
         jmdnsListen();
         Context context = this;
-
-
     }
 
+    //On Click Submit
     public void onClickSubmit(View v){
         Intent intent = new Intent(this, MQTT.class);
         startActivity(intent);
@@ -104,60 +112,30 @@ public class Registration extends AppCompatActivity{
         }
     }
 
+    /**
+     * Method listens for services being broadcast.
+     */
 
     public void jmdnsListen(){
-
-
 
         try {
             InetAddress inet = getInet();
             String hostname = "Android";
-
             JmDNS jmdns = JmDNS.create(inet, hostname);
             jmdns.addServiceListener("_MQTT._tcp.local.", new SampleListener());
-
-            System.out.println("Press q and Enter, to quit");
-
-
-            //jmdns.close();
-            System.out.println("Done");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-   /* public void onClickListen(View v){
-        try {
-            *//*String host = "192.168.0.25";
-            InetAddress inet = InetAddress.getByName(host);
-            *//*
 
-            InetAddress inet = getInet();
-
-            JmDNS jmdns = JmDNS.create(inet);
-            jmdns.addServiceListener("_MQTT._tcp.local.", new SampleListener());
-
-            System.out.println("Press q and Enter, to quit");
-           *//* int b;
-            while ((b = System.in.read()) != -1 && (char) b != 'q') {
-                *//*//**//* Stub *//**//**//**//*
-
-            }*//*
-
-            //jmdns.close();
-            System.out.println("Done");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-*/
     /**
      * A listener to listen to services registered on the local network
      * Used to obtain the IP address of the Hub during registration.
      */
 
-    //was static before findViewbyId added.
+
     class SampleListener implements ServiceListener {
 
         String brokerIP;
@@ -169,34 +147,30 @@ public class Registration extends AppCompatActivity{
         String SERVICE_TYPE = "MQTT";
         String SERVICE_NAME = "sample_jmdns_service";
 
-
-
+        /**
+         * Adds service once found
+         * @param event
+         */
         @Override
         public void serviceAdded(ServiceEvent event) {
             System.out.println("Service added   : " + event.getName() + "." + event.getType());
-
-
-            System.out.println("Hello");
             System.out.println("Event: " + event.getInfo());
             jmdns.requestServiceInfo(SERVICE_TYPE, event.getName());
-
-
-          /*String[] serviceUrl = event.getInfo().getURLs();
-
-            String tcpIP = "tc"+serviceUrl[0].substring(3);
-            String ipAddress = serviceUrl[0].substring(7, 19);
-            Log.i("tcpIP: ", tcpIP);
-            System.out.println("tcpIP: " + tcpIP);
-            System.out.println(ipAddress);*/
-
         }
 
+        /**
+         * Triggered when a service is removed
+         * @param event
+         */
         @Override
         public void serviceRemoved(ServiceEvent event) {
             System.out.println("Service removed : " + event.getName() + "." + event.getType());
         }
 
-
+        /**
+         * Confirmation service has been resolved
+         * @param event
+         */
         public void serviceResolved(ServiceEvent event) {
             System.out.println("Service resolved: " + event.getInfo());
             String[] serviceUrl = event.getInfo().getURLs();
@@ -205,12 +179,8 @@ public class Registration extends AppCompatActivity{
             String ipAddress = serviceUrl[0].substring(7, 19);
             System.out.println(ipAddress);
             ready=true;
-
             tv.setText(ipAddress);
-
             tabLay.addView(tabRow);
-
-
         }
     }
 
@@ -244,29 +214,23 @@ public class Registration extends AppCompatActivity{
             noMatch.setText("  Oh noes! Your password doesn't match :(");
             noMatch.setGravity(50);
 
-            // set prompts.xml to alertdialog builder
             alertDialogBuilder.setView(noMatch);
 
-            // set dialog message
             alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                 }
             });
 
-            // create alert dialog
             AlertDialog alertDialog = alertDialogBuilder.create();
-            // show it
             alertDialog.show();
 
         } else {
-
 
             String fullURLStr = sensorServerURL +
                     "Register?&user2="+userName+"&pass2="+pass +"&email=" + email + "&phone=" +
                         phoneNo + "&hub=" + ipAddress;
             Log.i("Full URL: ", fullURLStr);
 
-            // send it using utility method
             String result = sendToServer(fullURLStr);
 
             broadcast(userName);
@@ -295,9 +259,8 @@ public class Registration extends AppCompatActivity{
             url = new URL(urlStr);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
-            // Issue the GET to send the data
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            // read the result to process response and ensure data sent
+            //Iterates through response
             while ((line = rd.readLine()) != null) {
                 result = result + line;
             }
@@ -305,8 +268,6 @@ public class Registration extends AppCompatActivity{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // send back data from server
         return result;
     }
 
@@ -332,11 +293,20 @@ public class Registration extends AppCompatActivity{
         return inet;
     }
 
+    /**
+     * Method returns IP address
+     * @param ipAdd
+     * @return
+     */
     public static String rtnIp(String ipAdd){
         String ipAddress = ipAdd;
         Log.i("IpAdd: ", ipAddress);
         return ipAddress;
     }
+
+    /**
+     * Persisting the Username, password and IP address of Hub for future use
+     */
 
     public static String getAddIp() {
         return addIp;
@@ -346,18 +316,8 @@ public class Registration extends AppCompatActivity{
         this.addIp = addIp;
     }
 
-    /**
-     * Persisting the Username, password and IP address of Hub for future use
-     */
-
-    /**
-     *
-     */
-
     public void clickSearch(View v){
         jmdnsListen();
     }
 
-
 }
-

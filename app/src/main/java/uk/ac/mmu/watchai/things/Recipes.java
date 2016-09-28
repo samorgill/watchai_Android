@@ -58,9 +58,15 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
+
 /**
- * Created by ssorg on 17/09/2016.
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * Class for displaying and starting recipes
  */
+
 public class Recipes extends AppCompatActivity{
 
     String TAG = "Sensor MainActivity";
@@ -72,27 +78,11 @@ public class Recipes extends AppCompatActivity{
     TextView tv;
     private String usrName, ipAddy;
 
-
-
     private static String mqttMsg;
     private static String mqttTopic;
 
-    //Home
-   /*public static String sensorServerURL =
-            "http://192.168.0.19/Server/DataToServer";*/
-
-    // WebServer
     public static String sensorServerURL =
             "http://3-dot-projectbabywatch.appspot.com/";
-
-
-
-
-
-
-    //192 is my IPv4 address on the laptop used by localhost. This will need to change for Pi.
-    // Can only be accessed via same wifi network. "Server" is the program name in Eclipse
-    //"http://10.0.2.2:8080/SensorServer/sensorToDB";
 
     MQTT mqttClass;
     public Button sleepBtn;
@@ -112,21 +102,16 @@ public class Recipes extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe);
 
-        // Ignore this code if not sending location to server
-        // IMPORTANT: Strict mode only here to allow networking in main thread.
-        // Ideally create an AsyncTask
-        // Need to remove this after testing initial solution and use AsyncTask
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //checks the state when the app is launced
-
+        //Get ip address and username
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         ipAddy = settings.getString("ipadd", "");
         usrName = settings.getString("usrName", "");
 
-       // LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout2);
+
         tabLay = (TableLayout) findViewById(R.id.tabLay);
         tabRow = (TableRow) findViewById(R.id.tabRow);
         sleepBtn = (Button) findViewById(R.id.sleepBtn);
@@ -136,8 +121,6 @@ public class Recipes extends AppCompatActivity{
         getSet = new GetSet();
         mqttClass = new MQTT();
         mContext = this;
-
-
     }
 
     /**
@@ -193,6 +176,5 @@ public class Recipes extends AppCompatActivity{
         getSet.setMqttMsg(msg);
         mqttClass.msgClick(mContext);
     }
-
 
 }

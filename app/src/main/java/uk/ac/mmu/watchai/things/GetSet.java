@@ -1,7 +1,11 @@
 package uk.ac.mmu.watchai.things;
 
 /**
- * Created by ssorg on 17/09/2016.
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * Getters and setters for MQTT messages and topics
  */
 public class GetSet {
 

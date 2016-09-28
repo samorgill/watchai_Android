@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = settings.edit();
-        /*editor.putString("ipadd", "");
-        editor.putString("usrName", "");
-        editor.putString("pssWord", "");*/
         editor.clear();
         editor.apply();
 
@@ -66,59 +63,83 @@ public class MainActivity extends AppCompatActivity {
         noMatch.setText("Logged out");
         noMatch.setGravity(50);
 
-        // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(noMatch);
 
-
-        // set dialog message
+        //Set error
         alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 goReg();
             }
         });
 
-        // create alert dialog
+        // Creates alert
         AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
+        // Shows alert
         alertDialog.show();
 
-
-
-
-
     }
+
+    /**
+     * Opens registration activity
+     * @param v
+     */
 
     public void onClickReg(View v){
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
     }
 
+    /**
+     * Opens registration activity
+     */
+
     public void goReg(){
         Intent intent = new Intent(this, Registration.class);
         startActivity(intent);
     }
 
+    /**
+     * Opens MQTT class
+     * @param v
+     */
     public void mqtt(View v){
         Intent intent = new Intent(this, MQTT.class);
         startActivity(intent);
     }
 
+    /**
+     * Opens Things activity
+     * @param v
+     */
     public void clickThings(View v){
         Intent intent = new Intent(this, Things.class);
         startActivity(intent);
     }
+
+    /**
+     * Opens Monitor activity
+     * @param v
+     */
 
     public void clickMonitor(View v){
         Intent intent = new Intent(this, Monitor.class);
         startActivity(intent);
     }
 
+    /**
+     * Opens Recipe activity
+     * @param v
+     */
 
     public void clickRecipes(View v){
         Intent intent = new Intent(this, Recipes.class);
         startActivity(intent);
     }
 
+    /**
+     * Opens Music activity
+     * @param v
+     */
 
     public void clickMusic(View v){
         Intent intent = new Intent(this, Music.class);

@@ -18,8 +18,13 @@ import android.widget.TextView;
 
 import uk.ac.mmu.babywatch.R;
 
+
 /**
- * Created by ssorg on 17/09/2016.
+ * @author Samuel Orgill 15118305
+ * NW5 Smartwatch Control of Environment
+ * September 2016
+ *
+ * Class for displaying and playing music
  */
 public class Music extends AppCompatActivity{
 
@@ -59,13 +64,11 @@ public class Music extends AppCompatActivity{
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //checks the state when the app is launced
-
+        //Gets IP address and username
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         ipAddy = settings.getString("ipadd", "");
         usrName = settings.getString("usrName", "");
 
-       // LinearLayout ll = (LinearLayout)findViewById(R.id.linearLayout2);
         tabLay = (TableLayout) findViewById(R.id.tabLay);
         tabRow = (TableRow) findViewById(R.id.tabRow);
         sleepBtn = (Button) findViewById(R.id.sleepBtn);
@@ -75,8 +78,6 @@ public class Music extends AppCompatActivity{
         getSet = new GetSet();
         mqttClass = new MQTT();
         mContext = this;
-
-
     }
 
     /**
